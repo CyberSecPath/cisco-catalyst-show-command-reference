@@ -2,59 +2,60 @@
 
 ## Overview
 
-This repository provides a practical reference for commonly used Cisco Catalyst 9300 and 9500 show commands. It covers interface verification, VLANs, switching, routing, redundancy, system health, and network troubleshooting.
+This repository provides a structured reference for commonly used show commands on Cisco Catalyst 9300 and 9500 series switches. It covers interface verification, VLANs, Layer 2 switching, Layer 3 routing, redundancy, hardware health, and network troubleshooting.
 
-Each command includes its purpose and key items to check when interpreting the output.
+Each command includes its purpose and key details to check when interpreting its output.
 
 ## Command References
 
 ### Cisco Catalyst 9300
 
-[**Open the Catalyst 9300 Command Reference**](C9300-Show-Commands.md)
+[**View the Catalyst 9300 Command Reference**](C9300-Show-Commands.md)
 
-Focus areas:
+Topics include:
 - Interface status and connectivity
-- VLANs, trunk links, and MAC address tables
-- Spanning tree and EtherChannel
+- VLANs and trunk links
+- MAC address tables and spanning tree
+- EtherChannel verification
 - IP addressing and routing
 - Power over Ethernet (PoE)
 - Authentication and access lists
-- System logs, hardware inventory, and health
+- System logs and hardware health
 
 ### Cisco Catalyst 9500
 
-[**Open the Catalyst 9500 Command Reference**](C9500-Show-Commands.md)
+[**View the Catalyst 9500 Command Reference**](C9500-Show-Commands.md)
 
-Focus areas:
+Topics include:
 - Core and distribution switching
 - Uplink and interface troubleshooting
 - Layer 2 and Layer 3 verification
 - Routing tables and routing protocols
 - EtherChannel and port-channel status
 - Redundancy and StackWise Virtual
-- Hardware health, authentication, and system logs
+- Hardware health and system diagnostics
 
-## Troubleshooting Scenarios
+## Troubleshooting Workflows
 
-The references include example investigation workflows for endpoint connectivity, interface errors, and inter-network connectivity.
+The guides include example investigation workflows for endpoint connectivity, interface errors, routing issues, and redundancy checks where supported.
 
 ## How to Use This Reference
 
-1. Select the appropriate switch reference.
-2. Locate the command relevant to the issue.
-3. Review the purpose and troubleshooting checks.
-4. Compare the results with the expected network behavior.
+1. Open the reference for the relevant switch platform.
+2. Find the command associated with the issue.
+3. Review its purpose and troubleshooting checks.
+4. Compare the output with the expected network behavior.
 5. Continue investigating based on the findings.
 
-Only run commands on systems you are authorized to access.
+Run commands only on devices you are authorized to access.
 
 ## Technical Notes
 
-- Command availability and syntax can vary by hardware model and Cisco IOS XE software version.
+- Command availability and syntax vary by hardware model and Cisco IOS XE version.
 - StackWise Virtual commands apply only to supported Catalyst 9500 models and configurations.
-- Replace placeholders such as `<interface>`, `<vlan-id>`, and `<ip-address>` with appropriate values.
-- The examples are intended for educational reference and do not contain production configurations or confidential network information.
+- Replace placeholders such as `<interface>` and `<vlan-id>` with appropriate values.
+- Configuration and diagnostic output may contain sensitive information. Do not publish confidential device data.
 
 ## Scope
 
-This repository focuses on read-only verification and troubleshooting commands. It is a technical reference, not a complete configuration guide or a substitute for platform-specific documentation.
+This repository focuses on read-only verification and troubleshooting. It is a technical reference, not a complete configuration guide or a substitute for platform-specific Cisco documentation.
