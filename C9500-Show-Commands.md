@@ -2,156 +2,158 @@
 
 ## Overview
 
-This reference documents commonly used Cisco Catalyst 9500 show commands for network monitoring, routing, redundancy, and troubleshooting.
+This guide covers common show commands for Cisco Catalyst 9500 switches, with an emphasis on core and distribution switching, Layer 3 routing, high-speed uplinks, redundancy, and system health.
 
-It emphasizes core and distribution switching, high-availability concepts, uplink verification, and system health.
+Command availability and output may vary by hardware model, IOS XE version, and enabled features. StackWise Virtual is supported only on applicable models and configurations.
 
-All examples are generic and contain no customer, production, or proprietary network information.
+## 1. Redundancy and StackWise Virtual
 
-## Command Reference
+| Command | Purpose / When to Use | What to Check |
+|---|---|---|
+| `show redundancy` | Review redundancy configuration and information. | Available redundancy information and operating mode. |
+| `show redundancy states` | Inspect redundancy state details where supported. | Current and standby roles and reported state. |
+| `show stackwise-virtual` | Review StackWise Virtual status on supported systems. | Domain and operational information reported by the platform. |
+| `show stackwise-virtual link` | Inspect StackWise Virtual link status where supported. | Link state and configured member interfaces. |
+| `show stackwise-virtual dual-active-detection` | Review dual-active detection information where supported. | Detection method and operational status. |
 
-| Command | Explanation |
-|---|---|
-| `show stackwise-virtual` | Displays StackWise Virtual status and related information on supported platforms. |
-| `show stackwise-virtual link` | Displays StackWise Virtual link information and operational status. |
-| `show stackwise-virtual dual-active-detection` | Displays dual-active detection configuration and status. |
-| `show redundancy` | Displays redundancy and high-availability information. |
-| `show redundancy states` | Displays the current redundancy state and supervisor roles where supported. |
-| `show version` | Displays the IOS XE software version, switch model, uptime, and system information. |
-| `show inventory` | Displays hardware inventory and installed components. |
-| `show running-config` | Displays the configuration currently active on the switch. |
-| `show startup-config` | Displays the saved configuration used during startup. |
-| `show boot` | Displays boot-related information and configured boot variables. |
-| `show interfaces status` | Summarizes interface status, VLAN, speed, duplex, and interface type. |
-| `show interfaces description` | Displays interface descriptions and operational status. |
-| `show interfaces` | Displays detailed interface statistics, traffic information, and errors. |
-| `show interfaces counters errors` | Displays interface error counters that can help identify link or communication problems. |
-| `show interfaces <interface>` | Displays detailed operational information and statistics for a specific interface. |
-| `show interfaces trunk` | Displays trunk interfaces and their VLAN information. |
-| `show interfaces transceiver detail` | Displays detailed optical transceiver information where supported. |
-| `show vlan brief` | Lists configured VLANs and associated access ports. |
-| `show interfaces <interface> switchport` | Displays Layer 2 switchport configuration and operational information for an interface. |
-| `show mac address-table` | Displays MAC addresses learned by the switch and their associated ports. |
-| `show spanning-tree` | Displays Spanning Tree Protocol status and information. |
-| `show spanning-tree summary` | Provides a summary of Spanning Tree status and configuration. |
-| `show spanning-tree vlan <vlan-id>` | Displays Spanning Tree information for a specific VLAN. |
-| `show etherchannel summary` | Shows EtherChannel groups and the status of their member links. |
-| `show etherchannel detail` | Displays detailed information about configured EtherChannel groups. |
-| `show interfaces port-channel` | Displays operational information and statistics for port-channel interfaces. |
-| `show ip interface brief` | Summarizes Layer 3 interfaces, IP addresses, and operational status. |
-| `show ip interface` | Displays detailed IP configuration and operational information for interfaces. |
-| `show ip route` | Displays the IPv4 routing table. |
-| `show ip route connected` | Displays routes associated with directly connected networks. |
-| `show ip route static` | Displays statically configured IPv4 routes. |
-| `show ip route summary` | Provides a summary of the IPv4 routing table. |
-| `show ip protocols` | Displays information about configured IP routing protocols. |
-| `show arp` | Displays IPv4-to-MAC address mappings maintained by the switch. |
-| `show cdp neighbors` | Identifies directly connected Cisco devices discovered through CDP. |
-| `show cdp neighbors detail` | Displays detailed information about neighboring Cisco devices. |
-| `show lldp neighbors` | Identifies neighboring devices discovered through LLDP. |
-| `show lldp neighbors detail` | Displays detailed LLDP neighbor information. |
-| `show logging` | Displays system log messages that may help identify errors and operational events. |
-| `show processes cpu` | Displays CPU utilization and process information. |
-| `show processes memory` | Displays memory utilization and process information. |
-| `show environment` | Displays available environmental information, such as temperature and power status. |
-| `show platform` | Displays platform-specific hardware and software information. |
-| `show platform software status control-processor brief` | Displays control-processor CPU and memory status where supported. |
-| `show authentication sessions` | Displays access-authentication session information where supported and configured. |
-| `show ip access-lists` | Displays configured IPv4 access control lists and their entries. |
-| `show ntp status` | Displays Network Time Protocol synchronization status. |
-| `show ntp associations` | Displays NTP peers and association information. |
-| `show license summary` | Displays a summary of software licensing information. |
-| `show tech-support` | Collects extensive system and troubleshooting information for diagnostics and technical support. |
+StackWise Virtual commands are not applicable to every Catalyst 9500 model. Confirm platform support and software requirements before relying on them.
 
-## Common Troubleshooting Examples
+## 2. System Information and Hardware
 
-### 1. StackWise Virtual and Redundancy
+| Command | Purpose / When to Use | What to Check |
+|---|---|---|
+| `show version` | Identify software, hardware, and uptime. | IOS XE version, model, uptime, and system image. |
+| `show inventory` | Review hardware components. | Product IDs, serial numbers, and component inventory. |
+| `show running-config` | Review the active configuration. | Relevant interface, routing, and feature settings; protect any sensitive output. |
+| `show startup-config` | Review the saved startup configuration. | Whether the saved configuration contains expected settings. |
+| `show boot` | Review boot-related settings where supported. | Boot variables and image selection information. |
+| `show environment all` | Review environmental information where supported. | Temperature, fans, and power status. |
+| `show platform` | Review platform-specific hardware information. | Reported hardware state and component status. |
+| `show platform software status control-processor brief` | Review control-processor resource information where supported. | CPU and memory health indicators. |
+| `show license summary` | Review license information where supported. | License status and relevant feature entitlements. |
 
-Use these commands to inspect StackWise Virtual status and redundancy on supported configurations.
+## 3. Interfaces and Uplinks
+
+| Command | Purpose / When to Use | What to Check |
+|---|---|---|
+| `show interfaces status` | Quickly review interface status. | Unexpected down or disabled interfaces. |
+| `show interfaces description` | Review interface descriptions and state. | Expected descriptions and operational status. |
+| `show interfaces` | Inspect detailed interface statistics. | Operational state, speed, traffic, and errors. |
+| `show interfaces counters errors` | Investigate interface error counters. | CRC, input, and other abnormal error counts. |
+| `show interfaces <interface>` | Inspect a specific interface. | Link state, counters, and relevant operational details. |
+| `show interfaces transceiver detail` | Inspect optical diagnostics where supported. | Optical levels, temperature, and transceiver alarms. |
+
+## 4. VLANs and Layer 2 Switching
+
+| Command | Purpose / When to Use | What to Check |
+|---|---|---|
+| `show vlan brief` | Review VLANs and port membership. | Expected VLANs and active status. |
+| `show interfaces trunk` | Review trunk operation. | Trunk state and allowed/active VLANs. |
+| `show interfaces <interface> switchport` | Inspect Layer 2 settings where applicable. | Access/trunk mode and VLAN information. |
+| `show mac address-table` | Review learned MAC addresses. | Expected addresses, VLANs, and interfaces. |
+| `show spanning-tree` | Review spanning-tree operation. | Root information, port roles, and states. |
+| `show spanning-tree summary` | Review spanning-tree summary information. | Mode and reported consistency information. |
+| `show spanning-tree vlan <vlan-id>` | Inspect spanning tree for a particular VLAN. | Root bridge, port roles, and blocking/forwarding states where applicable. |
+| `show etherchannel summary` | Review EtherChannel status. | Whether expected member links are bundled. |
+| `show etherchannel detail` | Inspect EtherChannel details. | Member-port state and bundle information. |
+| `show interfaces port-channel` | Review port-channel interfaces. | Operational state and interface statistics. |
+
+## 5. Layer 3 Routing
+
+| Command | Purpose / When to Use | What to Check |
+|---|---|---|
+| `show ip interface brief` | Review Layer 3 interface addressing and state. | Expected addresses and operational status. |
+| `show ip interface` | Inspect Layer 3 interface details. | IP settings and relevant interface features. |
+| `show ip route` | Inspect the IPv4 routing table. | Expected destination routes and next hops. |
+| `show ip route connected` | Review directly connected routes where supported. | Networks associated with operational Layer 3 interfaces. |
+| `show ip route static` | Review static routes where supported. | Expected configured static routes. |
+| `show ip route summary` | Review routing-table summary information where supported. | Route counts and summarized table information. |
+| `show ip protocols` | Review routing protocol information where applicable. | Active protocols and relevant routing settings. |
+| `show arp` | Review IPv4 neighbor mappings. | Expected IP-to-MAC entries. |
+
+## 6. Neighbor Discovery and Troubleshooting
+
+| Command | Purpose / When to Use | What to Check |
+|---|---|---|
+| `show cdp neighbors` | Identify directly connected Cisco devices. | Neighbor identity, local interface, and remote port. |
+| `show cdp neighbors detail` | Review detailed CDP neighbor information. | Reported platform and network information. |
+| `show lldp neighbors` | Identify LLDP-advertising neighbors. | Neighbor identity and connected interfaces. |
+| `show lldp neighbors detail` | Review detailed LLDP neighbor information. | Advertised device and interface details. |
+| `show logging` | Review system messages. | Link events, redundancy events, and recurring errors. |
+| `show processes cpu` | Review CPU utilization. | High utilization or unusual process activity. |
+| `show processes memory` | Review process memory usage. | Unusual resource consumption. |
+| `show authentication sessions` | Inspect authentication sessions where supported. | Session status and access information. |
+| `show ip access-lists` | Review configured IPv4 access lists and counters. | Relevant entries and match counters. |
+
+## 7. Time Synchronization and Diagnostic Collection
+
+| Command | Purpose / When to Use | What to Check |
+|---|---|---|
+| `show ntp status` | Review NTP synchronization status where supported. | Whether the device is synchronized. |
+| `show ntp associations` | Review NTP peers where supported. | Peer state and synchronization information. |
+| `show tech-support` | Collect broad diagnostic information when authorized. | Use when requested by an administrator or support team; output can be extensive and sensitive. |
+
+## Troubleshooting Scenarios
+
+### Scenario 1: An uplink is down or unstable
+
+Start with:
+
+```text
+show interfaces status
+show interfaces <interface>
+show interfaces counters errors
+show interfaces trunk
+show logging
+```
+
+**Investigation:**
+1. Confirm the expected interface is operational.
+2. Review interface statistics and error counters.
+3. Check trunk operation and VLAN forwarding requirements if the link carries VLAN traffic.
+4. Review logs for link flaps or related events.
+5. Investigate optics, cabling, peer configuration, and the connected device as appropriate.
+
+### Scenario 2: A destination network is unreachable
+
+Start with:
+
+```text
+show ip interface brief
+show ip route
+show ip protocols
+show arp
+```
+
+**Investigation:**
+1. Verify the relevant Layer 3 interfaces are operational.
+2. Determine whether the routing table contains a route to the destination.
+3. Check the next hop and relevant neighbor information.
+4. If routing protocols are in use, inspect their status and expected route advertisements.
+5. Continue with authorized end-to-end testing and upstream-device checks.
+
+### Scenario 3: Redundancy or StackWise Virtual requires investigation
+
+On a supported StackWise Virtual deployment, start with:
 
 ```text
 show stackwise-virtual
 show stackwise-virtual link
 show stackwise-virtual dual-active-detection
 show redundancy
-show redundancy states
-```
-
-### 2. Uplink and Interface Problems
-
-Use these commands to investigate interface status, errors, and trunk configuration.
-
-```text
-show interfaces status
-show interfaces description
-show interfaces counters errors
-show interfaces trunk
-show interfaces transceiver detail
-```
-
-### 3. VLAN and Switching Problems
-
-Use these commands to verify VLAN membership, learned MAC addresses, and Spanning Tree behavior.
-
-```text
-show vlan brief
-show mac address-table
-show spanning-tree
-show spanning-tree summary
-```
-
-### 4. EtherChannel Problems
-
-Use these commands to review port-channel configuration and member-link status.
-
-```text
-show etherchannel summary
-show etherchannel detail
-show interfaces port-channel
-```
-
-### 5. Routing and Connectivity Problems
-
-Use these commands to examine Layer 3 interfaces, routing information, and ARP entries.
-
-```text
-show ip interface brief
-show ip route
-show ip route summary
-show arp
-show ip protocols
-```
-
-### 6. System Health
-
-Use these commands to review logs, resource utilization, and hardware status.
-
-```text
-show version
 show logging
-show processes cpu
-show processes memory
-show environment
-show platform
 ```
+
+**Investigation:**
+1. Confirm the platform supports the feature.
+2. Review the reported StackWise Virtual and link status.
+3. Inspect dual-active detection information.
+4. Review redundancy state and related system logs.
+5. Follow the organization's change-control and escalation procedures before making configuration changes.
 
 ## Notes
 
-- StackWise Virtual commands apply only to supported Catalyst 9500 models and software releases.
-- StackWise Virtual links connect the two physical switches participating in a supported virtual-switch configuration.
-- Replace `<interface>` with the appropriate interface identifier.
-- Replace `<vlan-id>` with the appropriate VLAN number.
-- Command availability and output can vary by model, IOS XE release, licensing, and configuration.
-- These commands are for monitoring and verification; they do not configure or change the switch.
-- Confirm command syntax against Cisco documentation for the target model and software release.
-
-## Skills Demonstrated
-
-- Cisco IOS XE command familiarity
-- Core and distribution switching concepts
-- StackWise Virtual and redundancy concepts
-- Layer 2 switching and VLANs
-- Layer 3 routing fundamentals
-- Uplink and EtherChannel verification
-- Network monitoring and troubleshooting concepts
-- Technical documentation
+- These references focus on verification and troubleshooting, not configuration changes.
+- Command availability and syntax depend on the specific hardware, software version, and enabled features.
+- Some commands and outputs are platform-specific; verify support against the relevant Cisco documentation.
+- Treat configuration and diagnostic output as potentially sensitive. Do not publish real device configurations, IP addressing plans, credentials, or customer information.
